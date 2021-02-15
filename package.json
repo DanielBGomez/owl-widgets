@@ -1,0 +1,45 @@
+{
+  "name": "flashbang",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build-scripts": "NODE_ENV=production simplifyify 'src/*.js' --outfile 'lib/*.min.js' --minify",
+    "compile-scripts": "simplifyify 'src/*.js' --outfile 'lib/*.min.js'"
+  },
+  "author": "Daniel B Gómez",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.13",
+    "@babel/plugin-proposal-class-properties": "^7.12.13",
+    "@babel/preset-env": "^7.12.13",
+    "@babel/preset-react": "^7.12.13",
+    "@jsdevtools/simplifyify": "^8.0.4",
+    "babelify": "^10.0.0",
+    "color-scale": "^1.1.0",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "styled-components": "^5.2.1",
+    "styled-normalize": "^8.0.7"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "@babel/preset-env",
+            "@babel/preset-react"
+          ],
+          "plugins": [
+            "@babel/plugin-proposal-class-properties"
+          ]
+        }
+      ]
+    ]
+  }
+}
