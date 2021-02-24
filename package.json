@@ -8,7 +8,8 @@
   },
   "scripts": {
     "build-scripts": "NODE_ENV=production simplifyify 'src/*.js' --outfile 'lib/*.min.js' --minify",
-    "compile-scripts": "simplifyify 'src/*.js' --outfile 'lib/*.min.js'"
+    "compile-scripts": "simplifyify 'src/*.js' --outfile 'lib/*.min.js'",
+    "pack": "node scripts/pack.js"
   },
   "author": "Daniel B Gómez",
   "license": "ISC",
@@ -20,6 +21,9 @@
     "@jsdevtools/simplifyify": "^8.0.4",
     "babelify": "^10.0.0",
     "color-scale": "^1.1.0",
+    "commander": "^6.2.1",
+    "fs-extra": "^9.1.0",
+    "jszip": "^3.6.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
@@ -41,5 +45,8 @@
         }
       ]
     ]
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0"
   }
 }
