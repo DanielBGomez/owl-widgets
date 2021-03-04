@@ -2,15 +2,16 @@
 import ColorScale from 'color-scale'
 
 // Common colors
+const main = '#298FD2'
 const black = '#262626'
-const betterware = '#1EAEC7'
-const secondary = '#004f84'
+const secondary = '#5cdea5'
+const twitch = '#6441a5'
 
 // Exports
 export default {
     // Colors
-    ...scaleColor('main', betterware),
-    ...scaleColor('blue', betterware),
+    ...scaleColor('main', main),
+    ...scaleColor('blue', main),
     ...scaleColor('darkBlue', '#004f84'),
     ...scaleColor('green', secondary),
     ...scaleColor('secondary', secondary),
@@ -36,7 +37,10 @@ export default {
     grayLighten_2: '#C4C9D4',
     grayLighten_3: '#E3E4EA',
     grayLighten_4: '#F1F2F4',
-    grayLighten_5: '#FAFBFC'
+    grayLighten_5: '#FAFBFC',
+
+    // Brands
+    ...scaleColor('twitch', twitch)
 }
 
 /**

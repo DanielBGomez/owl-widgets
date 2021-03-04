@@ -9,6 +9,7 @@
   "scripts": {
     "build-scripts": "NODE_ENV=production simplifyify 'src/*.js' --outfile 'lib/*.min.js' --minify",
     "compile-scripts": "simplifyify 'src/*.js' --outfile 'lib/*.min.js'",
+    "bcs": "browserify src/dashboard.js -o lib/dashboard.min.js",
     "pack": "node scripts/pack.js"
   },
   "author": "Daniel B Gómez",
@@ -19,6 +20,7 @@
     "@babel/preset-env": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
     "@jsdevtools/simplifyify": "^8.0.4",
+    "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "babelify": "^10.0.0",
     "color-scale": "^1.1.0",

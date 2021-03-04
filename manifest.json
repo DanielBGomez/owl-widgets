@@ -16,7 +16,7 @@
         "windows":{
             "Dashboard":{
                     "file":"lib/dashboard.html",
-                    "transparent": false,
+                    "transparent": true,
                     "resizable": true,
                     "use_os_windowing": false,
                     "show_maximize": true,

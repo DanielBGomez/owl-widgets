@@ -7,9 +7,12 @@ import Styled, { keyframes, css } from 'styled-components'
 import { DefaultThemeGlobals } from '../../themes'
 
 // Layout
-// import {
-//     Label
-// } from './Layout.styled'
+import {
+    WindowBody
+} from './Layout.styled'
+
+// Components
+import WidgetCard from '../../components/WidgetCard'
 
 // Animations
 const Flash = keyframes`
@@ -57,6 +60,9 @@ class Dashboard extends React.Component {
         return <React.Fragment>
             <DefaultThemeGlobals />
             <WindowHeader />
+            <WindowBody>
+                <WidgetCard />
+            </WindowBody>
         </React.Fragment>
     }
 }

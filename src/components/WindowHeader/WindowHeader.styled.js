@@ -7,16 +7,13 @@ import {
     spacing
 } from '../../themes'
 
-// Icons
-import Close from '@material-ui/icons/Close'
-
 // Elements
 const WindowHeaderWrapper = Styled.div`
     width: 100%;
     display: flex;
-    height: ${ spacing.l };
+    height: ${ spacing.xl };
     color: ${ colors.white };
-    background-color: ${ colors.grayDark_4 };
+    background-color: ${ colors.grayDark_5 };
 `
 
 const WindowControls = Styled.div`

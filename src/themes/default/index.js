@@ -24,12 +24,16 @@ const GlobalStyle = createGlobalStyle`
     html {
         width: 100%;
         height: 100%;
-        background-color: ${ transparentize(0.95, colors.grayDark_3) }
+        font-size: 16px;
+        font-family: 'Roboto', sans-serif;
     }
     body,
     #app {
+        display: flex;
         width: inherit;
         height: inherit;
+        flex-direction: column;
+        background-color: ${ transparentize(0, colors.grayDark_4) };
     }
 
     #app {
