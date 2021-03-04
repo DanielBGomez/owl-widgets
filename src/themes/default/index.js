@@ -2,12 +2,13 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 import { createGlobalStyle } from 'styled-components'
+import { transparentize } from 'polished'
 
 // Contents
 import { normalize } from 'styled-normalize'
 
 // Configs
-// import colors from '../colors'
+import colors from '../colors'
 
 // Elements
 const GlobalStyle = createGlobalStyle`
@@ -23,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
     html {
         width: 100%;
         height: 100%;
+        background-color: ${ transparentize(0.95, colors.grayDark_3) }
     }
     body,
     #app {
