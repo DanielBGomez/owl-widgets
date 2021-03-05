@@ -8,7 +8,8 @@ import { DefaultThemeGlobals } from '../../themes'
 
 // Layout
 import {
-    WindowBody
+    WindowBody,
+    SectionTitle
 } from './Layout.styled'
 
 // Components
@@ -61,6 +62,7 @@ class Dashboard extends React.Component {
             <DefaultThemeGlobals />
             <WindowHeader />
             <WindowBody>
+                <SectionTitle>Widgets</SectionTitle>
                 <WidgetCard />
             </WindowBody>
         </React.Fragment>

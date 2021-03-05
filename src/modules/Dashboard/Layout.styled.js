@@ -3,7 +3,8 @@ import Styled from 'styled-components'
 
 // Configs
 import {
-    spacing
+    spacing,
+    colors
 } from '../../themes'
 
 
@@ -15,7 +16,15 @@ const WindowBody = Styled.div`
     padding: ${ spacing.l };
 `
 
+const SectionTitle = Styled.div`
+    font-size: 1rem;
+    text-align: left;
+    margin-bottom: ${ spacing.s };
+    color: ${ colors.grayLighten };
+`
+
 // Exports
 export {
-    WindowBody
+    WindowBody,
+    SectionTitle
 }
