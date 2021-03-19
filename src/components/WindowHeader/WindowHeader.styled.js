@@ -1,4 +1,5 @@
 // Modules
+import React from 'react'
 import Styled from 'styled-components'
 
 // Theme
@@ -7,8 +8,12 @@ import {
     spacing
 } from '../../themes'
 
+// Icons
+import RemoveIcon from '@material-ui/icons/Remove'
+import CloseIcon from '@material-ui/icons/Close'
+
 // Elements
-const WindowHeaderWrapper = Styled.div`
+const Wrapper = Styled.div`
     width: 100%;
     display: flex;
     height: ${ spacing.xl };
@@ -16,25 +21,46 @@ const WindowHeaderWrapper = Styled.div`
     background-color: ${ colors.grayDark_5 };
 `
 
-const WindowControls = Styled.div`
+const Icon = Styled.div`
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    margin: auto ${ spacing.s };
+    background-repeat: no-repeat;
+    background-image: url('/assets/icon/favicon.png');
+`
+
+const Title = Styled.div`
+    text-align: left;
+    user-select: none;
+    font-size: 0.75rem;
+    color: ${ colors.grayLighten_3 };
+    margin: auto auto auto ${ spacing.noSpace };
+`
+
+const Controls = Styled.div`
     height: 100%;
     margin-left: auto;
     display: inline-flex;
     margin-right: ${ spacing.noSpace };
 `
 
-const WindowButton = Styled.div`
+const Button = `
     margin: 0;
     height: 100%;
     cursor: pointer;
     align-items: center;
     display: inline-flex;
-    width: ${ spacing.xl };
+    width: ${ spacing.xxl };
     justify-contents: center;
     transition: all 100ms linear;
 `
+const Minimize = Styled( props => <div { ...props }><RemoveIcon fontSize="small" /></div> )`
+    ${ Button }
+`
+const Close = Styled( props => <div { ...props }><CloseIcon fontSize="small" /></div> )`
+    ${ Button }
 
-const CloseWindow = Styled(WindowButton)`
     &:hover {
         background-color: ${ colors.red }
     }
@@ -43,8 +69,11 @@ const CloseWindow = Styled(WindowButton)`
 
 // Exports
 export {
-    WindowHeaderWrapper,
-    WindowControls,
-    WindowButton,
-    CloseWindow
+    Wrapper,
+    Icon,
+    Title,
+    Controls,
+    Button,
+    Minimize,
+    Close
 }

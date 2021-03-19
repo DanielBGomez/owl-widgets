@@ -1,23 +1,25 @@
 // Modules
 import React, {
-    Component,
-    Fragment
+    Component
 } from 'react'
 import PropTypes from 'prop-types'
 
 // Elements
 import {
-    WindowHeaderWrapper,
-    WindowControls,
-    WindowButton,
-    CloseWindow
+    Wrapper,
+    Icon,
+    Controls,
+    Minimize,
+    Close,
+    Title
 } from './WindowHeader.styled'
 
-// Icons
-import Minimize from '@material-ui/icons/Minimize'
-import Close from '@material-ui/icons/Close'
-
-// Component
+/**
+ * WindowHeader Component
+ * 
+ * @version 0.2.0
+ * @author DanielBGomez <contact@danielbgomez.com>
+ */
 class WindowHeader extends Component {
     constructor(props){
         // Always call super first
@@ -26,17 +28,20 @@ class WindowHeader extends Component {
         // State
     }
     render(){
-        return <WindowHeaderWrapper>
-            <WindowControls>
-                <WindowButton>
-                    <Minimize fontSize="small" />
-                </WindowButton>
-                <CloseWindow>
-                    <Close fontSize="small" />
-                </CloseWindow>
-            </WindowControls>
-        </WindowHeaderWrapper>
+        return <Wrapper>
+            <Icon />
+            <Title>Owl Widgets { this.props.title ? '- ' + this.props.title : '' }</Title>
+            <Controls>
+                <Minimize />
+                <Close />
+            </Controls>
+        </Wrapper>
     }
+}
+
+// Prop validations
+WindowHeader.propTypes = {
+    title: PropTypes.string
 }
 
 // Exports

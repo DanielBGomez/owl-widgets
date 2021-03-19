@@ -16,6 +16,8 @@
         "windows":{
             "Dashboard":{
                     "file":"lib/dashboard.html",
+                    "desktop_only": true,
+                    "native_window": true,
                     "transparent": true,
                     "resizable": true,
                     "use_os_windowing": false,

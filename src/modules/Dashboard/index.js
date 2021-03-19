@@ -1,73 +1,43 @@
 // Modules
-import React from 'react'
-import PropTypes from 'prop-types'
-import Styled, { keyframes, css } from 'styled-components'
+import { createStore } from 'redux'
+import { connect } from 'react-redux'
 
-// Local modules
-import { DefaultThemeGlobals } from '../../themes'
+// Module
+import Dashboard from './Dashboard'
 
-// Layout
-import {
-    WindowBody,
-    SectionTitle
-} from './Layout.styled'
+// Stores
+import WidgetsReducer, * as Widgets from '../../stores/Widgets'
+export const reducer = WidgetsReducer
 
-// Components
-import WidgetCard from '../../components/WidgetCard'
+// Data
+const mapStateToProps = state => {
+    const {
+        activeWidgets,
+        disabledWidgets
+    } = Widgets
 
-// Animations
-const Flash = keyframes`
-    0% {
-        opacity: 0;
-    }
-    5%,
-    60% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
-`
-
-// Components
-const FlashBang = Styled.div`
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    
-    ${props => props.active && css`
-        animation: ${Flash} 5s linear;
-    `}
-`
-import WindowHeader from '../../components/WindowHeader'
-
-// Widget
-class Dashboard extends React.Component {
-    constructor(props){
-        // Always call super first
-        super(props)
-
-        // Widgate state
-        this.state = {
-            show: false
-        }
-
-        // Update state
-        // setTimeout(() => this.setState({ show: true }), 1000)
-    }
-
-    render(){
-        return <React.Fragment>
-            <DefaultThemeGlobals />
-            <WindowHeader />
-            <WindowBody>
-                <SectionTitle>Widgets</SectionTitle>
-                <WidgetCard />
-            </WindowBody>
-        </React.Fragment>
+    // Props
+    return {
+        activeWidgets: activeWidgets(state),
+        disabledWidgets: disabledWidgets(state),
+        widgets: state.widgets
     }
 }
+// Methods
+const mapDispatchToProps = dispatch => ({
+    registerMultipleWidgets: widgets => dispatch( Widgets.registerMultipleWidgets(widgets) ),
+    registerWidget: widget => dispatch( Widgets.registerWidget(widget) ),
+    unregisterWidget: widget => dispatch( Widgets.unregisterWidget(widget) ),
+    enableWidget: uuid => dispatch( Widgets.enableWidget(uuid) ),
+    disableWidget: uuid => dispatch( Widgets.disableWidget(uuid) ),
+    toggleWidget: uuid => dispatch( Widgets.toggleWidget(uuid) ),
+})
 
-// Exports
-export default Dashboard
+// Container
+const DashboardContainer = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)( Dashboard )
+
+// Export
+export default DashboardContainer

@@ -26,10 +26,11 @@ class WidgetCard extends Component {
         super(props)
 
         // State
+        // this.props.enableWidget()
     }
     render(){
-        return <Wrapper>
-            <CheckBox active={ this.props.active } disabled={ this.props.disabled } />
+        return <Wrapper onClick={ this.props.toggleWidget }>
+            <CheckBox checked={ this.props.active } disabled={ this.props.disabled } />
             <Image image={ this.props.image } />
             <Texts>
                 <div className="name">{ this.props.name || 'Nombre' }</div>
@@ -42,22 +43,34 @@ class WidgetCard extends Component {
     /**
      * Trigger the widget action
      */
-    test(){
+    test(event){
+        event.stopPropagation()
+        
         // Ignore if disabled
         if(this.props.disabled) return;
 
-        console.log("test action")
     }
 }
 
-// Prop validations
-WidgetCard.propTypes = {
+// Shape
+export const WidgetCardShape = {
+    // Methods
+    enableWidget: PropTypes.func.isRequired,
+    disableWidget: PropTypes.func.isRequired,
+    toggleWidget: PropTypes.func.isRequired,
+
+    // States
     active: PropTypes.bool,
     disabled: PropTypes.bool,
+
+    // Data
     image: PropTypes.string,
     name: PropTypes.string.isRequired,
     version: PropTypes.string.isRequired
 }
+
+// Prop validations
+WidgetCard.propTypes = WidgetCardShape
 
 // Exports
 export default WidgetCard
