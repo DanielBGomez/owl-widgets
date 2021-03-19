@@ -5,6 +5,9 @@ import PropTypes from 'prop-types'
 // Local modules
 import { DefaultThemeGlobals } from '../../themes'
 
+// Docs
+import Overwolf from '../../docs/overwolf'
+
 // Layout
 import {
     WindowBody,
@@ -14,16 +17,27 @@ import {
 // Components
 import WidgetCard, { WidgetCardShape } from '../../components/WidgetCard'
 import WindowHeader from '../../components/WindowHeader'
-import { registerWidget } from '../../stores/Widgets'
 
-// Widget
+/**
+ * Dashboard module component
+ * 
+ * @version 0.3.0
+ * @author DanielBGomez <contact@danielbgomez.com>
+ */
 class Dashboard extends React.Component {
     constructor(props){
         // Always call super first
         super(props)
 
+        // Store appData
+        this.appData = this.props.appData
+
+
         // Update state
         this.fetchWidgets()
+    }
+    minimize( callback ){
+        Overwolf.windows.minimize(  )
     }
 
     render(){
@@ -68,6 +82,9 @@ class Dashboard extends React.Component {
 
 // Prop types
 Dashboard.propTypes = {
+    // AppData
+    appData: PropTypes.object.isRequired,
+
     // Elements
     widgets: PropTypes.arrayOf( PropTypes.shape( WidgetCardShape ) ),
     activeWidgets: PropTypes.arrayOf( PropTypes.shape( WidgetCardShape ) ),

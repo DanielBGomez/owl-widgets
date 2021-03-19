@@ -12,36 +12,31 @@
         "description":"Flashbang widget"
     },
     "data": {
-        "start_window":"Dashboard",
-        "windows":{
-            "Dashboard":{
-                    "file":"lib/dashboard.html",
-                    "desktop_only": true,
-                    "native_window": true,
-                    "transparent": true,
-                    "resizable": true,
-                    "use_os_windowing": false,
-                    "show_maximize": true,
-                    "disable_blur": true,
-                    "clickthrough": false,
-                    "size": {
-                        "width":800,
-                        "height":600
-                        },
-                    "min_size": {
-                        "width":600,
-                        "height":400
-                    }
-                },
-            "Flash":{
-                    "file":"lib/index.html",
-                    "transparent": true,
-                    "resizable": false,
-                    "use_os_windowing": false,
-                    "show_maximize": true,
-                    "disable_blur": true,
-                    "clickthrough": true
+        "start_window":"Main",
+        "windows": {
+            "Main": {
+                "file":"lib/main.html",
+                "is_background_page": true
+            },
+            "Dashboard": {
+                "file":"lib/dashboard.html",
+                "desktop_only": true,
+                "native_window": true,
+                "transparent": true,
+                "resizable": true,
+                "use_os_windowing": false,
+                "show_maximize": true,
+                "disable_blur": true,
+                "clickthrough": false,
+                "size": {
+                    "width":800,
+                    "height":600
+                    },
+                "min_size": {
+                    "width":600,
+                    "height":400
                 }
+            }
         }
     }
 }

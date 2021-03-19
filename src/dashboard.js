@@ -7,13 +7,22 @@ import { createStore } from 'redux'
 // Local modules
 import Dashboard, { reducer } from './modules/Dashboard'
 
+// Docs
+import OverWolf from './docs/overwolf'
+
+// Methods
+import Data from './methods/Data'
+
 // Stores
 const store = createStore( reducer )
+
+// AppData
+const AppData = Data( OverWolf.windows.getMainWindow() )
 
 // Render
 ReactDom.render(
     <Provider store={ store }>
-        <Dashboard />
+        <Dashboard appData={ AppData } />
     </Provider>,
     document.getElementById("app")
 )

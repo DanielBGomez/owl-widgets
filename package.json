@@ -9,7 +9,7 @@
   "scripts": {
     "build-scripts": "NODE_ENV=production simplifyify 'src/*.js' --outfile 'lib/*.min.js' --minify",
     "compile-scripts": "simplifyify 'src/*.js' --outfile 'lib/*.min.js'",
-    "bcs": "browserify src/dashboard.js -o lib/dashboard.min.js",
+    "bcs": "browserify src/*.js -o lib/*.min.js",
     "pack": "node scripts/pack.js"
   },
   "author": "Daniel B Gómez",
