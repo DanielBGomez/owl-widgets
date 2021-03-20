@@ -17,16 +17,28 @@
  * Calls the given callback function with the current window object as a parameter.
  * 
  * @callback getCurrentWindow
- * @param {CBWindowResult} callback A callback function which will be called with the current window object as a parameter
+ * @param {CBWindowResult} param    A callback function which will be called with the current window object as a parameter
  * @returns {void}
  */
 
 /**
  * Creates an instance of your window (the window’s name has to be declared in the manifest.json) or returns a window by the window name.
  * 
+ * This method can either have just the callback or an object and a callback.
+ * 
+ * Accepted objects:
+ * * DefaultSizeAndLocation
+ * * WindowProperties
+ * 
+ * @see DefaultSizeAndLocation
+ * @see WindowProperties
+ * 
+ * 
  * @callback obtainDeclaredWindow
  * @param {string} windowName           The name of the window that was declared in the data.windows section in the manifest
+ * @param {WindowProperties|DefaultSizeAndLocation|CBWindowResult} param 
  * @param {CBWindowResult} callback     A callback function which will be called with the current window object as a parameter
+ * @returns {void}
  */
 
 /**
@@ -35,6 +47,18 @@
  * @callback dragMove
  * @param {string} windowId             The id or name of the window to drag
  * @param {CBWindowResult} callback     A callback which is called when the drag is completed
+ */
+
+/**
+ * Start resizing the window from a specific edge or corner.
+ * 
+ * @todo contentRect param
+ * @todo rect param
+ * @todo callback param
+ * 
+ * @callback dragResize
+ * @param {string} windowId             The id or name of the window to resize
+ * @param {WindowDragEdge} edge         The edge or corner from which to resize the window
  */
 
 /**
@@ -92,6 +116,7 @@
  * @property {getCurrentWindow} getCurrentWindow 
  * @property {obtainDeclaredWindow} obtainDeclaredWindow
  * @property {dragMove} dragMove
+ * @property {dragResize} dragResize
  * @property {close} close
  * @property {minimize} minimize
  * @property {maximize} maximize

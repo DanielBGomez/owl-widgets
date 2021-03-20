@@ -11,6 +11,26 @@
  */
 
 /**
+ * Message prompt icon.
+ * 
+ * | Value       | Description                                              |
+ * | :---------- | :------------------------------------------------------- |
+ * | None        | No window edge or corner to drag                         |
+ * | Left        | Drag the left window edge in order to resize it          |
+ * | Right       | Drag the right window edge in order to resize it         |
+ * | Top         | Drag the top window edge in order to resize it           |
+ * | Bottom      | Drag the bottom window edge in order to resize it        |
+ * | TopLeft     | Drag the top-left window edge in order to resize it      |
+ * | TopRight    | Drag the top-right window edge in order to resize it     |
+ * | BottomLeft  | Drag the bottom-left window edge in order to resize it   |
+ * | BottomRight | Drag the bottom-right window edge in order to resize it  |
+ * 
+ * @version 0.78
+ * 
+ * @typedef {'None'|'Left'|'Right'|'Top'|'Bottom'|'TopLeft'|'TopRight'|'BottomLeft'|'BottomRight'} WindowDragEdge
+ */
+
+/**
  * The current window object.
  * 
  * @typedef {Object} WindowInfo
