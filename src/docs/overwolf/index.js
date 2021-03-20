@@ -1,21 +1,30 @@
 // Imports
-import './objects'
+import extensions from './extensions'
+import './utils'
 import './windows'
 
 /**
- * Use this API to create, interact with and modify your app’s windows.
+ * @typedef {import('./extensions').ExtensionsAPI} ExtensionsAPI
+ */
+
+/**
+ * Overwolf APIs are global components that allow interaction with various Overwolf features, third party services and server-side queries.
  * 
- * 
+ * @see https://overwolf.github.io/docs/api/overwolf-api-overview
  * 
  * @typedef {Object} Overwolf
- * @property {WindowsAPI} windows
+ * @property {ExtensionsAPI} extensions           Use the overwolf.utils API to get the user's system information, send keystrokes to the game, open URLs in default browser and more.
+ * @property {UtilsAPI} utils           Use the overwolf.utils API to get the user's system information, send keystrokes to the game, open URLs in default browser and more.
+ * @property {WindowsAPI} windows       Use the overwolf.windows API to to create, modify or interact with your app's windows.
  */
 
 /**
  * @type {Overwolf}
  */
 const ow = typeof overwolf != "undefined" ? overwolf : {
-    windows: {}
+    utils: {},
+    windows: {},
+    extensions
 }
 
 export default ow
