@@ -30,9 +30,17 @@
  */
 
 /**
+ * Start dragging a window.
+ * 
+ * @callback dragMove
+ * @param {string} windowId             The id or name of the window to drag
+ * @param {CBWindowResult} callback     A callback which is called when the drag is completed
+ */
+
+/**
  * Closes the window.
  * 
- * @callback minimize
+ * @callback close
  * @param {string} windowId             The id or name of the window to close
  * @param {CBWindowResult} callback     Called after the window is closed
  */
@@ -83,6 +91,7 @@
  * @property {getMainWindow} getMainWindow
  * @property {getCurrentWindow} getCurrentWindow 
  * @property {obtainDeclaredWindow} obtainDeclaredWindow
+ * @property {dragMove} dragMove
  * @property {close} close
  * @property {minimize} minimize
  * @property {maximize} maximize

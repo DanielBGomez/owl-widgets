@@ -5,9 +5,6 @@ import PropTypes from 'prop-types'
 // Local modules
 import { DefaultThemeGlobals } from '../../themes'
 
-// Docs
-import Overwolf from '../../docs/overwolf'
-
 // Layout
 import {
     WindowBody,
@@ -30,20 +27,17 @@ class Dashboard extends React.Component {
         super(props)
 
         // Store appData
+        this.windowId = this.props.windowId
         this.appData = this.props.appData
-
 
         // Update state
         this.fetchWidgets()
-    }
-    minimize( callback ){
-        Overwolf.windows.minimize(  )
     }
 
     render(){
         return <React.Fragment>
             <DefaultThemeGlobals />
-            <WindowHeader />
+            <WindowHeader windowId={ this.windowId } />
             <WindowBody>
                 <SectionTitle>Widgets</SectionTitle>
                 { this.props.widgets.map(widget => <WidgetCard key={ widget.uuid } {...widget} { ...this.widgetActions( widget ) } />) }

@@ -14,10 +14,13 @@ import {
     Title
 } from './WindowHeader.styled'
 
+// Docs
+import Overwolf from '../../docs/overwolf'
+
 /**
  * WindowHeader Component
  * 
- * @version 0.2.0
+ * @version 0.2.1
  * @author DanielBGomez <contact@danielbgomez.com>
  */
 class WindowHeader extends Component {
@@ -26,14 +29,19 @@ class WindowHeader extends Component {
         super(props)
 
         // State
+
+        // Events
+        // this.dragMove = () => Overwolf.windows.dragMove( this.props.windowId )
+        this.minimize = () => Overwolf.windows.minimize( this.props.windowId )
+        this.close = () => Overwolf.windows.close( this.props.windowId )
     }
     render(){
         return <Wrapper>
             <Icon />
             <Title>Owl Widgets { this.props.title ? '- ' + this.props.title : '' }</Title>
             <Controls>
-                <Minimize />
-                <Close />
+                <Minimize onClick={ this.minimize } />
+                <Close onClick={ this.close } />
             </Controls>
         </Wrapper>
     }
