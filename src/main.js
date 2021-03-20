@@ -2,19 +2,31 @@
 import Data from './methods/Data'
 
 // Docs
-import OverWolf from './docs/overwolf'
+import Overwolf from './docs/overwolf'
 
 // Setup data
 const App = Data(window, { windows: {} })
 
-// Load dashboard
-OverWolf.windows.obtainDeclaredWindow( 'Dashboard', ({ success, window }) => {
-    //
-    if( success ) {
-        // Store window
-        App.windows[window.name] = window.id
-        
-        // Restore window
-        OverWolf.windows.restore( window.id )
-    }
-})
+// Configs
+const Manifest = require('../manifest.json')
+const Views = Manifest.data.windows
+
+// Load views
+Promise.all( Object.keys(Views).map( windowName => new Promise( (resolve, reject) => {
+            // Get window data
+            Overwolf.windows.obtainDeclaredWindow( windowName, ({ success, window }) => {
+                    // Exit if failed
+                    if(!success) return reject()
+
+                    // Store window id
+                    App.windows[windowName] = window.id
+
+                    // Resolve
+                    resolve()
+                })
+        })
+    ))
+    .then(() => {
+        // Restore dashboard window
+        Overwolf.windows.restore( App.windows.Dashboard )
+    })

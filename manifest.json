@@ -2,8 +2,8 @@
     "manifest_version":1,
     "type":"WebApp",
     "meta":{
-        "name":"Flashbang",
-        "version":"0.2.0",
+        "name":"Owl Widgets",
+        "version":"0.2.1",
         "minimum-overwolf-version":"0.77.10",
         "author":"Daniel B Gomez",
         "icon":"assets/icon/app/icon.png",
