@@ -52,7 +52,22 @@ class WidgetCard extends Component {
     }
 }
 
-// Shape
+/**
+ * WidgetCard component props
+ * 
+ * @typedef {Object} WidgetCardObject
+ * @property {function} enableWidget
+ * @property {function} disableWidget
+ * @property {function} toggleWidget
+ * @property {boolean} active
+ * @property {boolean} disabled
+ * @property {string} image
+ * @property {string} name
+ * @property {string} version
+ */
+/**
+ * @type {WidgetCardObject}
+ */
 export const WidgetCardShape = {
     // Methods
     enableWidget: PropTypes.func.isRequired,

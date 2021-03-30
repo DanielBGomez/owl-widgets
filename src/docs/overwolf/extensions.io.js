@@ -32,6 +32,7 @@
  * @param {StorageSpace} space          The selected storage space.
  * @param {string} path                 Path within the space. Use null or empty string for the space root.
  * @param {ResultCallback} callback     Reports success or failure.
+ * @returns {void}
  */
 
 /**
@@ -141,7 +142,7 @@
  * Reports success or failure.
  * 
  * @callback ResultCallback
- * @param {Result} result
+ * @param {Result} callback
  * @returns {void}
  */
 

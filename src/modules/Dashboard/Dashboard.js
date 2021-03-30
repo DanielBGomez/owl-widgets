@@ -65,6 +65,12 @@ class Dashboard extends React.Component {
         // Register widgets
         this.props.registerMultipleWidgets(Widgets)
     }
+    /**
+     * Create an object with the widget's actions from props functions
+     * 
+     * @param {object} widget   Widget data 
+     * @returns Widget actions object
+     */
     widgetActions(widget){
         return {
             enableWidget: () => this.props.enableWidget( widget.uuid ),

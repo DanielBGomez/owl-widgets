@@ -17,11 +17,14 @@
   "devDependencies": {
     "@babel/core": "^7.12.13",
     "@babel/plugin-proposal-class-properties": "^7.12.13",
+    "@babel/plugin-transform-async-to-generator": "^7.13.0",
+    "@babel/plugin-transform-runtime": "^7.13.10",
     "@babel/preset-env": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
     "@jsdevtools/simplifyify": "^8.0.4",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "babelify": "^10.0.0",
     "color-scale": "^1.1.0",
     "commander": "^6.2.1",
@@ -47,7 +50,13 @@
             "@babel/preset-react"
           ],
           "plugins": [
-            "@babel/plugin-proposal-class-properties"
+            "@babel/plugin-proposal-class-properties",
+            [
+              "@babel/plugin-transform-runtime",
+              {
+                "regenerator": true
+              }
+            ]
           ]
         }
       ]
