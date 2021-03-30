@@ -30,8 +30,8 @@ class Dashboard extends React.Component {
         this.windowId = this.props.windowId
         this.appData = this.props.appData
 
-        // Update state
-        this.fetchWidgets()
+        // Register widgets
+        this.props.registerMultipleWidgets(this.appData.widgets)
     }
 
     render(){
@@ -43,27 +43,6 @@ class Dashboard extends React.Component {
                 { this.props.widgets.map(widget => <WidgetCard key={ widget.uuid } {...widget} { ...this.widgetActions( widget ) } />) }
             </WindowBody>
         </React.Fragment>
-    }
-    /**
-     * Fetch widgets from WS and register in store
-     * 
-     * @todo WS
-     */
-    fetchWidgets(){
-        // Hardcoded
-        const Widgets = [
-            {
-                uuid: "95e00420-93ff-458d-b887-587950da96e7",
-                active: true,
-                disabled: false,
-                name: "Flashbang",
-                version: "0.1.0",
-                image: "/assets/icon/app/icon.png"
-            }
-        ]
-
-        // Register widgets
-        this.props.registerMultipleWidgets(Widgets)
     }
     /**
      * Create an object with the widget's actions from props functions
