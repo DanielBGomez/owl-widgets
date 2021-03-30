@@ -42,6 +42,7 @@ new Promise((resolve, reject) => Overwolf.extensions.io.exist( STORAGE_SPACE, 'c
                 // Create file
                 await new Promise((resolve, reject) => Overwolf.extensions.io.writeTextFile( STORAGE_SPACE, 'configs/widgets.json', JSON.stringify( WIDGETS ), ({ success, error }) => success ? resolve() : reject(error)) )
 
+                resolve()
             } catch(error) {
                 reject(error)
             }
