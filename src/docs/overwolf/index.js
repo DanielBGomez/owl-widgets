@@ -5,6 +5,7 @@ import './windows'
 
 /**
  * @typedef {import('./extensions').ExtensionsAPI} ExtensionsAPI
+ * @typedef {import('./utils').UtilsAPI} UtilsAPI
  */
 
 /**

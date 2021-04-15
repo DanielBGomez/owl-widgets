@@ -18,7 +18,7 @@ import WindowHeader from '../../components/WindowHeader'
 /**
  * Dashboard module component
  * 
- * @version 0.3.0
+ * @version 0.3.1
  * @author DanielBGomez <contact@danielbgomez.com>
  */
 class Dashboard extends React.Component {

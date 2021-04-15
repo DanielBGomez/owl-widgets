@@ -3,7 +3,7 @@
     "type":"WebApp",
     "meta":{
         "name":"Owl Widgets",
-        "version":"0.2.3",
+        "version":"0.3.0",
         "minimum-overwolf-version":"0.77.10",
         "author":"Daniel B Gomez",
         "icon":"assets/icon/app/icon.png",
@@ -35,6 +35,17 @@
                 "min_size": {
                     "width":600,
                     "height":400
+                }
+            },
+            "Flashbang": {
+                "file": "lib/flashbang.html",
+                "transparent": true,
+                "resizable": true,
+                "disable_blur": true,
+                "clicktrough": true,
+                "size": {
+                    "width": 1366,
+                    "height": 768
                 }
             }
         }

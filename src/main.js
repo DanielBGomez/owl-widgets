@@ -1,3 +1,6 @@
+// Modules
+import { createStore } from 'redux'
+
 // Methods
 import Data from './methods/Data'
 
@@ -10,6 +13,9 @@ import WIDGETS from './configs/widgets'
 const STORAGE_SPACE = Overwolf.extensions.io.enums.StorageSpace.appData
 
 const CONFIGS = {}
+
+// Reducers
+import WidgetsReducer from './stores/Widgets'
 
 // Exists config file?
 new Promise((resolve, reject) => Overwolf.extensions.io.exist( STORAGE_SPACE, 'configs/widgets.json', async ({ success }) => {
@@ -56,7 +62,10 @@ new Promise((resolve, reject) => Overwolf.extensions.io.exist( STORAGE_SPACE, 'c
         // Setup data
         const App = Data(window, {
             windows: {},
-            widgets: CONFIGS.WIDGETS || WIDGETS
+            widgets: CONFIGS.WIDGETS || WIDGETS.concat,
+            stores: {
+                widgets: createStore( WidgetsReducer )
+            }
         })
 
         // Views

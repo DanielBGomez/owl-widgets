@@ -19,6 +19,7 @@ const WindowBody = Styled.div`
 const SectionTitle = Styled.div`
     font-size: 1rem;
     text-align: left;
+    user-select: none;
     margin-bottom: ${ spacing.s };
     color: ${ colors.grayLighten };
 `
