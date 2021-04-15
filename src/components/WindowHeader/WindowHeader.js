@@ -20,7 +20,7 @@ import Overwolf from '../../docs/overwolf'
 /**
  * WindowHeader Component
  * 
- * @version 0.2.1
+ * @version 0.3.0
  * @author DanielBGomez <contact@danielbgomez.com>
  */
 class WindowHeader extends Component {
@@ -31,12 +31,12 @@ class WindowHeader extends Component {
         // State
 
         // Events
-        // this.dragMove = () => Overwolf.windows.dragMove( this.props.windowId )
+        this.dragMove = () => Overwolf.windows.dragMove( this.props.windowId )
         this.minimize = () => Overwolf.windows.minimize( this.props.windowId )
         this.close = () => Overwolf.windows.close( this.props.windowId )
     }
     render(){
-        return <Wrapper>
+        return <Wrapper draggable="true" onDrag={ this.dragMove }>
             <Icon />
             <Title>Owl Widgets { this.props.title ? '- ' + this.props.title : '' }</Title>
             <Controls>
