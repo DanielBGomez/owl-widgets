@@ -36,7 +36,7 @@ class WindowHeader extends Component {
         this.close = () => Overwolf.windows.close( this.props.windowId )
     }
     render(){
-        return <Wrapper draggable="true" onDrag={ this.dragMove }>
+        return <Wrapper onMouseDown={ this.dragMove }>
             <Icon />
             <Title>Owl Widgets { this.props.title ? '- ' + this.props.title : '' }</Title>
             <Controls>
