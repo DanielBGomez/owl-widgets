@@ -1,6 +1,6 @@
 // Modules
 import React from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import { createGlobalStyle } from 'styled-components'
 import { transparentize } from 'polished'
 
@@ -33,7 +33,9 @@ const GlobalStyle = createGlobalStyle`
         width: inherit;
         height: inherit;
         flex-direction: column;
-        background-color: ${ transparentize(0, colors.grayDark_4) };
+        ${ props => !props.transparent && `
+            background-color: ${ transparentize(0, colors.grayDark_4) };
+        `}
     }
 
     #app {
@@ -43,16 +45,18 @@ const GlobalStyle = createGlobalStyle`
 
 // Components
 const GlobalStyleWrapper = ({
+    transparent
 }) => (
-    <GlobalStyle />
+    <GlobalStyle transparent={transparent}/>
 )
 
 // Props
-// GlobalStyleWrapper.defaultProps = {
-// }
-
-// GlobalStyleWrapper.propTypes = {
-// }
+GlobalStyleWrapper.defaultProps = {
+    transparent: false
+}
+GlobalStyleWrapper.propTypes = {
+    transparent: PropTypes.bool
+}
 
 // Exports
 export default GlobalStyleWrapper
