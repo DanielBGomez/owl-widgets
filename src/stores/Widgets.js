@@ -47,16 +47,23 @@ export const disabledWidgets = state => state.widgets.filter(widget => !widget.a
 
 // Reducer
 const reducer = (state = initialState, action) => {
+    // Widgets' uuid list
+    const WIDGETS = state.widgets.map(widget => widget.uuid)
+
+    // Actions
     switch(action.type){
         case 'REGISTER_MULTIPLE_WIDGETS':
             return {
                     ...state,
                     widgets: [
                         ...state.widgets,
-                        ...action.widgets
+                        ...action.widgets.filter( widget => !WIDGETS.includes(widget.uuid) )
                     ]
                 }
         case 'REGISTER_WIDGET':
+            // Ignore if already exists a widget with that uuid
+            if(WIDGETS.includes( action.widget.uuid )) return state
+
             // Append widget in state
             return {
                 ...state,
