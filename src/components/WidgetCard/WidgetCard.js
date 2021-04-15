@@ -17,7 +17,7 @@ import {
 /**
  * WidgetCard Component
  * 
- * @version 0.2.0
+ * @version 0.3.0
  * @author DanielBGomez <contact@danielbgomez.com>
  */
 class WidgetCard extends Component {
@@ -49,6 +49,8 @@ class WidgetCard extends Component {
         // Ignore if disabled
         if(this.props.disabled) return;
 
+        // Execute test action
+        this.props.action()
     }
 }
 
@@ -59,6 +61,7 @@ class WidgetCard extends Component {
  * @property {function} enableWidget
  * @property {function} disableWidget
  * @property {function} toggleWidget
+ * @property {function} test
  * @property {boolean} active
  * @property {boolean} disabled
  * @property {string} image
@@ -73,6 +76,7 @@ export const WidgetCardShape = {
     enableWidget: PropTypes.func.isRequired,
     disableWidget: PropTypes.func.isRequired,
     toggleWidget: PropTypes.func.isRequired,
+    test: PropTypes.func,
 
     // States
     active: PropTypes.bool,
@@ -81,7 +85,7 @@ export const WidgetCardShape = {
     // Data
     image: PropTypes.string,
     name: PropTypes.string.isRequired,
-    version: PropTypes.string.isRequired
+    version: PropTypes.string.isRequired,
 }
 
 // Prop validations

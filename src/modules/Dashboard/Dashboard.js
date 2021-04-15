@@ -18,7 +18,7 @@ import WindowHeader from '../../components/WindowHeader'
 /**
  * Dashboard module component
  * 
- * @version 0.3.1
+ * @version 0.4.0
  * @author DanielBGomez <contact@danielbgomez.com>
  */
 class Dashboard extends React.Component {
@@ -54,7 +54,8 @@ class Dashboard extends React.Component {
         return {
             enableWidget: () => this.props.enableWidget( widget.uuid ),
             disableWidget: () => this.props.disableWidget( widget.uuid ),
-            toggleWidget: () => this.props.toggleWidget( widget.uuid )
+            toggleWidget: () => this.props.toggleWidget( widget.uuid ),
+            action: () => ((this.appData.widgetsActions[widget.uuid] || {}).default || (e => e))()
         }
     }
 }

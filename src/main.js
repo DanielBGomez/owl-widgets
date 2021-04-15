@@ -63,6 +63,7 @@ new Promise((resolve, reject) => Overwolf.extensions.io.exist( STORAGE_SPACE, 'c
         const App = Data(window, {
             windows: {},
             widgets: CONFIGS.WIDGETS || WIDGETS.concat,
+            widgetsActions: {},
             stores: {
                 widgets: createStore( WidgetsReducer )
             }
