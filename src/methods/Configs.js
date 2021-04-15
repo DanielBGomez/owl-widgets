@@ -18,7 +18,7 @@ class WidgetConfigurations {
         // Fill instance
         this.values = defaults
         //
-        this._checkStorageSpace()
+        return this._checkStorageSpace()
     }
     /**
      * Sync with persistent data
@@ -68,23 +68,6 @@ class WidgetConfigurations {
             Overwolf.extensions.io.writeTextFile( STORAGE_SPACE, `configs/widget_${this.uuid}.json`, JSON.stringify( values ), ({ success, error }) => success ? resolve() : reject(error))
         })
     }
-
-    
-        //         try {
-        //             // Exists folder?
-        //             await new Promise((resolve, reject) => Overwolf.extensions.io.exist( STORAGE_SPACE, 'configs', ({ success, type }) => {
-        //                 // Create config folder if doesn't exists
-        //                 if(!success) Overwolf.extensions.io.createDirectory( STORAGE_SPACE, 'configs', ({ success, error }) => success ? resolve() : reject(error) )
-        //             } ))
-            
-        //             // Create file
-        //             await new Promise((resolve, reject) => Overwolf.extensions.io.writeTextFile( STORAGE_SPACE, 'configs/widgets.json', JSON.stringify( WIDGETS ), ({ success, error }) => success ? resolve() : reject(error)) )
-    
-        //             resolve()
-        //         } catch(error) {
-        //             reject(error)
-        //         }
-        //     }
     /**
      * Check if the config json file exists for the current widget by its uuid.
      * 
@@ -92,12 +75,12 @@ class WidgetConfigurations {
      * @throws {String} Error
      */
     exists(){
-        return new Promise((resolve, reject) => Overwolf.extensions.io.exist( STORAGE_SPACE, `configs/widget_${this.uuid}.json`, ({ success, error }) => success ? resolve(true) : ( error ? reject(error) : resolve(false) ) ))
+        return new Promise((resolve, reject) => Overwolf.extensions.io.exist( STORAGE_SPACE, `configs/widget_${this.uuid}.json`, ({ success, error }) => success ? resolve(true) : resolve(false) ))
     }
     /**
      * Check whether the config folder for the config files exists or creates it
      * 
-     * @returns {Promise<void>}
+     * @returns {Promise<this>}
      * @throws {String} Error
      */
     _checkStorageSpace(){
@@ -105,7 +88,9 @@ class WidgetConfigurations {
             // Validate folder existance
             Overwolf.extensions.io.exist( STORAGE_SPACE, 'configs', ({ success }) => {
                 // Create config folder if doesn't exists
-                if(!success) Overwolf.extensions.io.createDirectory( STORAGE_SPACE, 'configs', ({ success, error }) => success ? resolve() : reject(error) )
+                if(!success) return Overwolf.extensions.io.createDirectory( STORAGE_SPACE, 'configs', ({ success, error }) => success ? resolve(this) : reject(error) )
+                // Resolve
+                resolve(this)
             })
         })
     }
