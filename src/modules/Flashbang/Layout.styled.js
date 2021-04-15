@@ -1,5 +1,5 @@
 // Modules
-import Styled, { keyframes } from "styled-components"
+import Styled, { keyframes, css } from "styled-components"
 
 // Animations
 const FlashAnimation = keyframes`
@@ -23,6 +23,6 @@ export const Flash = Styled.div`
     background-color: white;
     
     ${props => props.active && css`
-        animation: ${FlashAnimation} 5s linear;
+        animation: ${FlashAnimation} ${props.duration} linear;
     `}
 `

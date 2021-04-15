@@ -3,7 +3,7 @@
     "type":"WebApp",
     "meta":{
         "name":"Owl Widgets",
-        "version":"0.3.0",
+        "version":"0.3.2",
         "minimum-overwolf-version":"0.77.10",
         "author":"Daniel B Gomez",
         "icon":"assets/icon/app/icon.png",
