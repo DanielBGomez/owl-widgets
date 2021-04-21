@@ -17,7 +17,7 @@ const AppData = Data( OverWolf.windows.getMainWindow() )
 
 // Render
 ReactDom.render(
-    <Provider store={ AppData.stores.widgets }>
+    <Provider store={ AppData.store }>
         <Dashboard appData={ AppData } windowId={ AppData.windows.Dashboard } />
     </Provider>,
     document.getElementById("app")

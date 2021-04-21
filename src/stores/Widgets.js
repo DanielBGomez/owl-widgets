@@ -1,66 +1,75 @@
+// Actions
+export const NAMESPACE = 'widgets/'
+export const REGISTER_MULTIPLE = `${NAMESPACE}REGISTER_MULTIPLE`
+export const REGISTER = `${NAMESPACE}REGISTER`
+export const UNREGISTER = `${NAMESPACE}UNREGISTER`
+export const ENABLE = `${NAMESPACE}ENABLE`
+export const DISABLE = `${NAMESPACE}DISABLE`
+export const TOGGLE = `${NAMESPACE}TOGGLE`
+
 // Initial state
 export const initialState = {
-    widgets: []
+    elements: []
 }
 
-// Actions
-export function registerMultipleWidgets(widgets){
+// Methods
+export function registerMultiple(elements){
     return {
-        type: "REGISTER_MULTIPLE_WIDGETS",
-        widgets
+        type: REGISTER_MULTIPLE,
+        elements
     }
 }
-export function registerWidget(widget){
+export function register(widget){
     return {
-        type: "REGISTER_WIDGET",
+        type: REGISTER,
         widget
     }
 }
-export function unregisterWidget(uuid){
+export function unregister(uuid){
     return {
-        type: "UNREGISTER_WIDGET",
+        type: UNREGISTER,
         uuid
     }
 }
-export function enableWidget(uuid){
+export function enable(uuid){
     return {
-        type: "ENABLE_WIDGET",
+        type: ENABLE,
         uuid
     }
 }
-export function disableWidget(uuid){
+export function disable(uuid){
     return {
-        type: "DISABLE_WIDGET",
+        type: DISABLE,
         uuid
     }
 }
-export function toggleWidget(uuid){
+export function toggle(uuid){
     return {
-        type: "TOGGLE_WIDGET",
+        type: TOGGLE,
         uuid
     }
 }
 
 // Getters
-export const activeWidgets = state => state.widgets.filter(widget => widget.active)
-export const disabledWidgets = state => state.widgets.filter(widget => !widget.active)
+export const active = state => state.elements.filter(widget => widget.active)
+export const disabled = state => state.elements.filter(widget => !widget.active)
 
 // Reducer
 const reducer = (state = initialState, action) => {
     // Widgets' uuid list
-    const WIDGETS = state.widgets.map(widget => widget.uuid)
+    const WIDGETS = state.elements.map(widget => widget.uuid)
 
     // Actions
     switch(action.type){
-        case 'REGISTER_MULTIPLE_WIDGETS':
+        case REGISTER_MULTIPLE:
             return {
                     ...state,
-                    widgets: [
-                        ...state.widgets,
-                        ...action.widgets.filter( widget => !WIDGETS.includes(widget.uuid) )
+                    elements: [
+                        ...state.elements,
+                        ...action.elements.filter( widget => !WIDGETS.includes(widget.uuid) )
                     ]
                 }
-        case 'REGISTER_WIDGET':
+        case REGISTER:
             // Ignore if already exists a widget with that uuid
             if(WIDGETS.includes( action.widget.uuid )) return state
 
@@ -68,38 +77,38 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 widgets: [
-                    ...state.widgets,
+                    ...state.elements,
                     action.widget
                 ]
             }
-        case 'UNREGISTER_WIDGET':
+        case UNREGISTER:
             // Filter widgets excluding the one provided (by uuid)
             return {
                 ...state,
-                widgets: state.widgets.filter( widget => widget.uuid != action.uuid )
+                widgets: state.elements.filter( widget => widget.uuid != action.uuid )
             }
-        case 'ENABLE_WIDGET':
+        case ENABLE:
             return {
                 ...state,
                 widgets: [
                     // Map widgets: if widget is the one provided (by uuid) set active as true
-                    ...state.widgets.map(widget => widget.uuid == action.uuid ? { ...widget, active: true } : widget)
+                    ...state.elements.map(widget => widget.uuid == action.uuid ? { ...widget, active: true } : widget)
                 ]
             }
-        case 'DISABLE_WIDGET':
+        case DISABLE:
             return {
                 ...state,
                 widgets: [
                     // Map widgets: if widget is the one provided (by uuid) set active as true
-                    ...state.widgets.map(widget => widget.uuid == action.uuid ? { ...widget, active: false } : widget)
+                    ...state.elements.map(widget => widget.uuid == action.uuid ? { ...widget, active: false } : widget)
                 ]
             }
-        case 'TOGGLE_WIDGET':
+        case TOGGLE:
             return {
                 ...state,
                 widgets: [
                     // Map widgets: if widget is the one provided (by uuid) set active as true
-                    ...state.widgets.map(widget => widget.uuid == action.uuid ? { ...widget, active: !widget.active } : widget)
+                    ...state.elements.map(widget => widget.uuid == action.uuid ? { ...widget, active: !widget.active } : widget)
                 ]
             }
         default:

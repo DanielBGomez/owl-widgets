@@ -60,15 +60,11 @@ class Flashbang extends React.Component {
         // Exit if already active
         if(this.state.active) return;
         
-        // Bring screen to front
-        // Overwolf.windows.bringToFront(({ success }) => {
-            // Update state
-            this.setState({ active: true }, () => {
-                // Remove active state on end
-                setTimeout(() => this.setState({ active: false }), parseInt( this.state.duration.replace('ms', '').replace('s', '000') ))
-            })
-        // })
-
+        // Update state
+        this.setState({ active: true }, () => {
+            // Remove active state on end
+            setTimeout(() => this.setState({ active: false }), parseInt( this.state.duration.replace('ms', '').replace('s', '000') ))
+        })
     }
     setup(){
         return new Promise(async (resolve, reject) => {
@@ -78,7 +74,7 @@ class Flashbang extends React.Component {
                 // Maximize windows
                 await new Promise((resolve, reject) => Overwolf.windows.maximize( this.windowId, ({ success }) => success ? resolve() : reject()))
                 // Set top most
-                
+                await new Promise((resolve, reject) => Overwolf.windows.setTopmost( this.windowId, true, ({ success, error }) => success ? resolve() : reject(error) ))
                 // Register widget actions to AppData
                 this.appData.widgetsActions[ CONFIG.uuid ].default = () => this.activate()
                 return resolve()

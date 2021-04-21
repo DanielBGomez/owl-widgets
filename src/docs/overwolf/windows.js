@@ -12,6 +12,7 @@
  * @property {minimize} minimize
  * @property {maximize} maximize
  * @property {restore} restore
+ * @property {setTopmost} setTopmost
  * @property {bringToFront} bringToFront
  */
 
@@ -138,6 +139,17 @@
  * @callback restore
  * @param {string} window               The id or name of the window to restore
  * @param {CBWindowResult?} callback    Called after the window is restored
+ */
+
+/**
+ * Change the window’s topmost status. Handle with care as topmost windows can negatively impact user experience.
+ * 
+ * @version 0.89
+ * 
+ * @callback setTopmost
+ * @param {string} windowId             The id or name of the window to restore
+ * @param {Boolean} shouldBeTopmost
+ * @param {ResultCallback?} callback    Reports success or failure
  */
 
 /**

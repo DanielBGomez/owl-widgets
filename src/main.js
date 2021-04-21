@@ -15,7 +15,7 @@ const STORAGE_SPACE = Overwolf.extensions.io.enums.StorageSpace.appData
 const CONFIGS = {}
 
 // Reducers
-import WidgetsReducer from './stores/Widgets'
+import Stores from './stores'
 
 // Exists config file?
 new Promise((resolve, reject) => Overwolf.extensions.io.exist( STORAGE_SPACE, 'configs/widgets.json', async ({ success }) => {
@@ -64,9 +64,7 @@ new Promise((resolve, reject) => Overwolf.extensions.io.exist( STORAGE_SPACE, 'c
             windows: {},
             widgets: CONFIGS.WIDGETS || WIDGETS.concat,
             widgetsActions: {},
-            stores: {
-                widgets: createStore( WidgetsReducer )
-            }
+            store: createStore( Stores )
         })
 
         // Views

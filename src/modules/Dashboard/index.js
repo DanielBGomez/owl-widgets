@@ -1,35 +1,31 @@
 // Modules
 import { connect } from 'react-redux'
 
-// Module
+// Component
 import Dashboard from './Dashboard'
 
 // Stores
-import WidgetsReducer, * as Widgets from '../../stores/Widgets'
-export const reducer = WidgetsReducer
+import { actions as StoreActions } from '../../stores'
 
 // Data
-const mapStateToProps = state => {
-    const {
-        activeWidgets,
-        disabledWidgets
-    } = Widgets
+const mapStateToProps = state => ({
+    activeWidgets: StoreActions.widgets.active( state.widgets ),
+    disabledWidgets: StoreActions.widgets.disabled( state.widgets ),
+    widgets: state.widgets.elements
+})
 
-    // Props
-    return {
-        activeWidgets: activeWidgets(state),
-        disabledWidgets: disabledWidgets(state),
-        widgets: state.widgets
-    }
-}
 // Methods
 const mapDispatchToProps = dispatch => ({
-    registerMultipleWidgets: widgets => dispatch( Widgets.registerMultipleWidgets(widgets) ),
-    registerWidget: widget => dispatch( Widgets.registerWidget(widget) ),
-    unregisterWidget: widget => dispatch( Widgets.unregisterWidget(widget) ),
-    enableWidget: uuid => dispatch( Widgets.enableWidget(uuid) ),
-    disableWidget: uuid => dispatch( Widgets.disableWidget(uuid) ),
-    toggleWidget: uuid => dispatch( Widgets.toggleWidget(uuid) ),
+    // Widgets
+    registerMultipleWidgets: widgets => dispatch( StoreActions.widgets.registerMultiple(widgets) ),
+    registerWidget: widget => dispatch( StoreActions.widgets.register(widget) ),
+    unregisterWidget: widget => dispatch( StoreActions.widgets.unregister(widget) ),
+    enableWidget: uuid => dispatch( StoreActions.widgets.enable(uuid) ),
+    disableWidget: uuid => dispatch( StoreActions.widgets.disable(uuid) ),
+    toggleWidget: uuid => dispatch( StoreActions.widgets.toggle(uuid) ),
+
+    // Notifications
+    createNotification: notificaiton => dispatch( StoreActions.notifications.create(notificaiton) )
 })
 
 // Container

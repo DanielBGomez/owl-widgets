@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 
 // Local modules
 import { DefaultThemeGlobals } from '../../themes'
+import Overwolf from '../../docs/overwolf'
 
 // Layout
 import {
@@ -18,7 +19,7 @@ import WindowHeader from '../../components/WindowHeader'
 /**
  * Dashboard module component
  * 
- * @version 0.4.0
+ * @version 0.5.0
  * @author DanielBGomez <contact@danielbgomez.com>
  */
 class Dashboard extends React.Component {
@@ -31,7 +32,7 @@ class Dashboard extends React.Component {
         this.appData = this.props.appData
 
         // Register widgets
-        this.props.registerMultipleWidgets(this.appData.widgets)
+        this.registerWidgets(this.appData.widgets)
     }
 
     render(){
@@ -43,6 +44,59 @@ class Dashboard extends React.Component {
                 { this.props.widgets.map(widget => <WidgetCard key={ widget.uuid } {...widget} { ...this.widgetActions( widget ) } />) }
             </WindowBody>
         </React.Fragment>
+    }
+    /**
+     * Register widgets by restoring their windows, logging errors as notifications.
+     * 
+     * @param {Array<object>} widgets 
+     */
+    registerWidgets(widgets){
+        // Loop widgets
+        Promise.all( widgets.map(widget => new Promise(resolve => {
+                // Widget window exists?
+                const window = this.appData.windows[widget.window]
+                if( !window ) {
+                    // Disable widget
+                    widget.disabled = true
+                    // Log error
+                    this.props.createNotification({
+                        type: "error",
+                        slug: "WIDGET_WINDOW_NOT_FOUND",
+                        msg: `The window for "${widget.name}" doesn't exists`,
+                        data: {
+                            widget
+                        }
+                    })
+                        
+                    // Resolve updated widget
+                    resolve( widget )
+                } else {
+
+                    // Open window
+                    Overwolf.windows.restore( window, ({ success }) => {
+                        // Window restored?
+                        if(!success){
+                            // Disable widget
+                            widget.disabled = true 
+                            // Log error
+                            this.props.createNotification({
+                                type: "error",
+                                slug: "WIDGET_WINDOW_RESTORE_ERROR",
+                                msg: `Restoring "${widget.name}" window failed`,
+                                data: {
+                                    window, 
+                                    widget
+                                }
+                            })
+                        }
+                        // Resolve updated widget
+                        resolve(widget)
+                    })
+                }
+            }))).then(widgets => {
+                // Register in store
+                this.props.registerMultipleWidgets(widgets)
+            })
     }
     /**
      * Create an object with the widget's actions from props functions
@@ -77,7 +131,9 @@ Dashboard.propTypes = {
     
     enableWidget: PropTypes.func.isRequired,
     disableWidget: PropTypes.func.isRequired,
-    toggleWidget: PropTypes.func.isRequired
+    toggleWidget: PropTypes.func.isRequired,
+
+    createNotification: PropTypes.func.isRequired
 }
 
 // Defaults
