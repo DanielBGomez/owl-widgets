@@ -1,6 +1,7 @@
 // Modules
 import React from 'react'
 import Styled from 'styled-components'
+import { transparentize } from 'polished'
 
 // Theme
 import {
@@ -54,6 +55,10 @@ const Button = `
     width: ${ spacing.xxl };
     justify-contents: center;
     transition: all 100ms linear;
+
+    &:hover {
+        background-color: ${transparentize(0.9, colors.white)};
+    }
 `
 const Minimize = Styled( props => <div { ...props }><RemoveIcon fontSize="small" /></div> )`
     ${ Button }
