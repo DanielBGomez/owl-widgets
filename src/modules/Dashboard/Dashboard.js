@@ -8,13 +8,13 @@ import Overwolf from '../../docs/overwolf'
 
 // Layout
 import {
-    WindowBody,
     SectionTitle
 } from './Layout.styled'
 
 // Components
 import WidgetCard, { WidgetCardShape } from '../../components/WidgetCard'
 import WindowHeader from '../../components/WindowHeader'
+import WindowBody from '../../components/WindowBody'
 
 /**
  * Dashboard module component
@@ -137,7 +137,7 @@ Dashboard.propTypes = {
 }
 
 // Defaults
-Dashboard.defaultProprs = {
+Dashboard.defaultProps = {
     widgets: [],
     activeWidgets: [],
     disabledWidgets: []
