@@ -9,8 +9,9 @@ import { normalize } from 'styled-normalize'
 
 // Configs
 import colors from '../colors'
+import { values as FontValues } from '../fonts'
 
-// Elements
+// Global style
 const GlobalStyle = createGlobalStyle`
     ${normalize}
 
@@ -24,8 +25,8 @@ const GlobalStyle = createGlobalStyle`
     html {
         width: 100%;
         height: 100%;
-        font-size: 16px;
-        font-family: 'Roboto', sans-serif;
+        font-size: ${FontValues.em}px;
+        font-family: ${FontValues.family.main};
     }
     body,
     #app {
