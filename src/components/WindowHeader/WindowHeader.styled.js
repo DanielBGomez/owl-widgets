@@ -15,6 +15,7 @@ import CloseIcon from '@material-ui/icons/Close'
 
 // Elements
 const Wrapper = Styled.div`
+    margin: 0;
     width: 100%;
     display: flex;
     height: ${ spacing.xl };

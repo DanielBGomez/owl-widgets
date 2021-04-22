@@ -25,38 +25,36 @@ const GlobalStyle = createGlobalStyle`
     html {
         width: 100%;
         height: 100%;
-        font-size: ${FontValues.em}px;
+        font-size: ${FontValues.em};
         font-family: ${FontValues.family.main};
     }
     body,
     #app {
         display: flex;
         width: inherit;
-        height: inherit;
         flex-direction: column;
-        ${ props => !props.transparent && `
-            background-color: ${ transparentize(0, colors.grayDark_4) };
-        `}
+        height: ${props => props.fitContent ? 'fit-content' : 'inherit'};
     }
 
     #app {
         overflow-y: auto;
+        ${ props => !props.transparent && `
+            background-color: ${ transparentize(0, colors.grayDark_4) };
+        `}
     }
 `
 
 // Components
-const GlobalStyleWrapper = ({
-    transparent
-}) => (
-    <GlobalStyle transparent={transparent}/>
-)
+const GlobalStyleWrapper = props => <GlobalStyle {...props} />
 
 // Props
 GlobalStyleWrapper.defaultProps = {
-    transparent: false
+    transparent: false,
+    fitContent: false
 }
 GlobalStyleWrapper.propTypes = {
-    transparent: PropTypes.bool
+    transparent: PropTypes.bool,
+    fitContent: PropTypes.bool
 }
 
 // Exports
