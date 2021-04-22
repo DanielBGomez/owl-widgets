@@ -1,5 +1,5 @@
 // Modules
-import DefaultThemeGlobals, * as common from './default'
+import DefaultThemeGlobals from './default'
 
 import colors from './colors'
 import spacing from './spacing'
