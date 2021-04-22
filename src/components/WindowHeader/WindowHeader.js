@@ -20,7 +20,7 @@ import Overwolf from '../../docs/overwolf'
 /**
  * WindowHeader Component
  * 
- * @version 0.3.0
+ * @version 0.3.1
  * @author DanielBGomez <contact@danielbgomez.com>
  */
 class WindowHeader extends Component {
@@ -40,7 +40,10 @@ class WindowHeader extends Component {
             <Icon />
             <Title>Owl Widgets { this.props.title ? '- ' + this.props.title : '' }</Title>
             <Controls>
-                <Minimize onClick={ this.minimize } />
+                {!this.props.hideMinimize ?
+                    <Minimize onClick={ this.minimize } />
+                    : ''
+                }
                 <Close onClick={ this.close } />
             </Controls>
         </Wrapper>
@@ -49,7 +52,13 @@ class WindowHeader extends Component {
 
 // Prop validations
 WindowHeader.propTypes = {
-    title: PropTypes.string
+    title: PropTypes.string,
+    hideMinimize: PropTypes.bool
+}
+
+// Defaults
+WindowHeader.defaultProps = {
+    hideMinimize: false
 }
 
 // Exports
