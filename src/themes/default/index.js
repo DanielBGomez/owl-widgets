@@ -2,7 +2,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { createGlobalStyle } from 'styled-components'
-import { transparentize } from 'polished'
 
 // Contents
 import { normalize } from 'styled-normalize'
@@ -39,7 +38,7 @@ const GlobalStyle = createGlobalStyle`
     #app {
         overflow-y: auto;
         ${ props => !props.transparent && `
-            background-color: ${ transparentize(0, colors.grayDark_4) };
+            background-color: ${ colors.grayDark_4 };
         `}
     }
 `
