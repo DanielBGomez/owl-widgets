@@ -7,6 +7,7 @@
  * @property {obtainDeclaredWindow} obtainDeclaredWindow
  * @property {dragMove} dragMove
  * @property {dragResize} dragResize
+ * @property {changeSize} changeSize
  * @property {changePosition} changePosition
  * @property {close} close
  * @property {minimize} minimize
@@ -40,7 +41,7 @@
  * Calls the given callback function with the current window object as a parameter.
  * 
  * @callback getCurrentWindow
- * @param {CBWindowResult} param    A callback function which will be called with the current window object as a parameter
+ * @param {WindowResultCallback} param    A callback function which will be called with the current window object as a parameter
  * @returns {void}
  */
 
@@ -59,8 +60,8 @@
  * 
  * @callback obtainDeclaredWindow
  * @param {string} windowName           The name of the window that was declared in the data.windows section in the manifest
- * @param {WindowProperties|DefaultSizeAndLocation|CBWindowResult} param 
- * @param {CBWindowResult} callback     A callback function which will be called with the current window object as a parameter
+ * @param {WindowProperties|DefaultSizeAndLocation|WindowResultCallback} param 
+ * @param {WindowResultCallback} callback     A callback function which will be called with the current window object as a parameter
  * @returns {void}
  */
 
@@ -69,7 +70,8 @@
  * 
  * @callback dragMove
  * @param {string} windowId             The id or name of the window to drag
- * @param {CBWindowResult} callback     A callback which is called when the drag is completed
+ * @param {WindowResultCallback} callback     A callback which is called when the drag is completed
+ * @returns {void}
  */
 
 /**
@@ -82,6 +84,22 @@
  * @callback dragResize
  * @param {string} windowId             The id or name of the window to resize
  * @param {WindowDragEdge} edge         The edge or corner from which to resize the window
+ * @returns {void}
+ */
+
+/**
+ * Changes the window size to the new width and height, in pixels, including DPI scale when resizing.
+ * 
+ * Notes
+ * - This function calculates DPI, so you don't need to calculate it yourself.
+ * - This function works for all the {@link https://overwolf.github.io/docs/topics/windows-types|window types}.
+ * 
+ * @version 0.149
+ * 
+ * @callback changeSize
+ * @param {ChangeWindowSizeParams} ChangeWindowSizeParams   Container for the window settings
+ * @param {ResultCallback} callback                         Reports success or failure when the size change is completed.
+ * @returns {void}
  */
 
 /**
@@ -96,6 +114,7 @@
  * @param {number} left                 The new window position on the X axis in pixels from the left
  * @param {number} top                  The new window position on the Y axis in pixels from the top
  * @param {ResultCallback?} callback    Reports success or failure when the position change is completed.
+ * @returns {void}
  */
 
 /**
@@ -105,7 +124,8 @@
  * 
  * @callback close
  * @param {string} windowId             The id or name of the window to close
- * @param {CBWindowResult} callback     Called after the window is closed
+ * @param {WindowResultCallback} callback     Called after the window is closed
+ * @returns {void}
  */
 
 /**
@@ -115,7 +135,8 @@
  * 
  * @callback minimize
  * @param {string} windowId             The id or name of the window to minimize
- * @param {CBWindowResult} callback     Called after the window is minimized
+ * @param {WindowResultCallback} callback     Called after the window is minimized
+ * @returns {void}
  */
 
 /**
@@ -128,7 +149,8 @@
  * 
  * @callback maximize
  * @param {string} windowId             The id or name of the window to maximize
- * @param {CBWindowResult} callback     Called after the window is maximized
+ * @param {WindowResultCallback} callback     Called after the window is maximized
+ * @returns {void}
  */
 
 /**
@@ -138,7 +160,8 @@
  * 
  * @callback restore
  * @param {string} window               The id or name of the window to restore
- * @param {CBWindowResult?} callback    Called after the window is restored
+ * @param {WindowResultCallback?} callback    Called after the window is restored
+ * @returns {void}
  */
 
 /**
@@ -150,6 +173,7 @@
  * @param {string} windowId             The id or name of the window to restore
  * @param {Boolean} shouldBeTopmost
  * @param {ResultCallback?} callback    Reports success or failure
+ * @returns {void}
  */
 
 /**
@@ -198,6 +222,13 @@
  * @returns {void}
  */
 
+/**
+ * A callback function which will be called with a window object as a parameter
+ * 
+ * @callback WindowResultCallback
+ * @param {WindowResult} window
+ * @returns {void}
+ */
 
 // ###################################
 // ##             Types             ##
@@ -210,11 +241,12 @@
  */
 
 /**
- * A callback function which will be called with a window object as a parameter
- * 
- * @callback CBWindowResult
- * @param {WindowResult} window
- * @returns {void}
+ * @typedef ChangeWindowSizeParams
+ * @version 0.149
+ * @property {String} window_id
+ * @property {number} width
+ * @property {number} height
+ * @property {boolean} auto_dpi_resize  
  */
 
 /**
