@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
 // Local modules
-import WidgetConfig from '../../methods/Configs'
+import Configurations from '../../methods/Configurations'
 import { DefaultThemeGlobals } from '../../themes'
 import Overwolf from '../../docs/overwolf'
 
@@ -38,7 +38,7 @@ class Flashbang extends React.Component {
         this.appData = this.props.appData
 
         // Init config
-        this._configs = WidgetConfig( CONFIG.uuid, CONFIG )
+        this._configs = Configurations( 'widget_' + CONFIG.uuid, CONFIG )
             .then(configs => configs.sync()
                     .then(() => {
                         // Init widget actions object in appData
