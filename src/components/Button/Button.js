@@ -21,7 +21,7 @@ class Button extends Component {
      */
     render(){
         return <Wrapper {...this.props} onClick={ this.click.bind(this) }>
-            { this.props.title || 'Button' }
+            { this.props.label || 'Button' }
         </Wrapper>
     }
     /**
@@ -40,7 +40,7 @@ Button.propTypes = {
     // Spread Wrapper
     ...Wrapper.propTypes,
     // Text
-    title: PropTypes.string,
+    label: PropTypes.string,
     // Events
     onClick: PropTypes.func
 }
