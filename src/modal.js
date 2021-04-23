@@ -1,18 +1,18 @@
 // Modules
-import React from 'react'
+import React, { Fragment } from 'react'
 import { render } from 'react-dom'
 
 // Component
 import Modal from './modules/Modal'
 
 // Docs
-// import OverWolf from './docs/overwolf'
+import OverWolf from './docs/overwolf'
 
 // Methods
-// import Data from './methods/Data'
+import Data from './methods/Data'
 
 // AppData
-// const AppData = Data( OverWolf.windows.getMainWindow() )
+const AppData = Data( OverWolf.windows.getMainWindow() )
 
 // Render
-render(<Modal />, document.getElementById("app"))
+render(<Modal {...AppData.modalProps} appData={AppData} windowId={AppData.windows.Modal} />, document.getElementById("app"))

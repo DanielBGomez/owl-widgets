@@ -41,8 +41,10 @@
                 "file": "lib/flashbang.html",
                 "transparent": true,
                 "resizable": true,
+                "show_in_taskbar": false,
+                "topmost": true,
                 "disable_blur": true,
-                "clicktrough": true,
+                "clickthrough": true,
                 "size": {
                     "width": 1366,
                     "height": 768
@@ -50,10 +52,13 @@
             },
             "Modal": {
                 "file": "lib/modal.html",
+                "desktop_only": true,
+                "native_window": true,
                 "transparent": true,
                 "resizable": true,
+                "use_os_windowing": false,
                 "disable_blur": true,
-                "clicktrough": true,
+                "clickthrough": false,
                 "size": {
                     "width": 400,
                     "height": 300
