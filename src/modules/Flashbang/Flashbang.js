@@ -39,15 +39,14 @@ class Flashbang extends React.Component {
 
         // Init config
         this._configs = Configurations( 'widget_' + CONFIG.uuid, CONFIG )
-            .then(configs => configs.sync()
-                    .then(() => {
-                        // Init widget actions object in appData
-                        this.appData.widgetsActions[ CONFIG.uuid ] = {}
-        
-                        // Update state and setup
-                        this.setState(configs.values, () => this.setup())
-                    })
-            )
+        this._configs.sync()
+            .then(() => {
+                // Init widget actions object in appData
+                this.appData.widgetsActions[ CONFIG.uuid ] = {}
+
+                // Update state and setup
+                this.setState(this._configs.values, () => this.setup())
+            })
     }
 
     render(){
