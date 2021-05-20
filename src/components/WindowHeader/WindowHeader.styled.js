@@ -70,6 +70,11 @@ const Close = Styled( props => <div { ...props }><CloseIcon fontSize="small" /><
     &:hover {
         background-color: ${ colors.red }
     }
+
+    ${ props => props.disabled && `
+        cursor: not-allowed;
+        background-color: ${ colors.gray } !important;
+    ` }
 `
 
 
