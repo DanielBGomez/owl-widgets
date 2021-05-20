@@ -13,6 +13,7 @@
  * @property {minimize} minimize
  * @property {maximize} maximize
  * @property {restore} restore
+ * @property {hide} hide
  * @property {setTopmost} setTopmost
  * @property {bringToFront} bringToFront
  */
@@ -59,7 +60,7 @@
  * 
  * 
  * @callback obtainDeclaredWindow
- * @param {string} windowName           The name of the window that was declared in the data.windows section in the manifest
+ * @param {string} windowName                 The name of the window that was declared in the data.windows section in the manifest
  * @param {WindowProperties|DefaultSizeAndLocation|WindowResultCallback} param 
  * @param {WindowResultCallback} callback     A callback function which will be called with the current window object as a parameter
  * @returns {void}
@@ -69,7 +70,7 @@
  * Start dragging a window.
  * 
  * @callback dragMove
- * @param {string} windowId             The id or name of the window to drag
+ * @param {string} windowId                   The id or name of the window to drag
  * @param {WindowResultCallback} callback     A callback which is called when the drag is completed
  * @returns {void}
  */
@@ -123,7 +124,7 @@
  * @version 0.78
  * 
  * @callback close
- * @param {string} windowId             The id or name of the window to close
+ * @param {string} windowId                   The id or name of the window to close
  * @param {WindowResultCallback} callback     Called after the window is closed
  * @returns {void}
  */
@@ -134,7 +135,7 @@
  * @version 0.78
  * 
  * @callback minimize
- * @param {string} windowId             The id or name of the window to minimize
+ * @param {string} windowId                   The id or name of the window to minimize
  * @param {WindowResultCallback} callback     Called after the window is minimized
  * @returns {void}
  */
@@ -148,7 +149,7 @@
  * @version 0.81
  * 
  * @callback maximize
- * @param {string} windowId             The id or name of the window to maximize
+ * @param {string} windowId                   The id or name of the window to maximize
  * @param {WindowResultCallback} callback     Called after the window is maximized
  * @returns {void}
  */
@@ -159,7 +160,18 @@
  * @version 0.78
  * 
  * @callback restore
- * @param {string} window               The id or name of the window to restore
+ * @param {string} window                     The id or name of the window to restore
+ * @param {WindowResultCallback?} callback    Called after the window is restored
+ * @returns {void}
+ */
+
+/**
+ * Hides the window from screen and taskbar.
+ * 
+ * @version 0.108
+ * 
+ * @callback hide
+ * @param {string} windowId                   The id or name of the window to hide
  * @param {WindowResultCallback?} callback    Called after the window is restored
  * @returns {void}
  */
