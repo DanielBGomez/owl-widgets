@@ -24,6 +24,7 @@ export const initialState = {
     cancelLabel: "Cancel",
     onConfirm: e => e,
     onCancel: e => e,
+    onClose: e => e,
     opened: false
 }
 

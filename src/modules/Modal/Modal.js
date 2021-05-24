@@ -20,7 +20,7 @@ import { ButtonsWrapper } from './Layout.styled'
 /**
  * Modal module component
  * 
- * @version 0.3.1
+ * @version 1.0.0
  * @author DanielBGomez <contact@danielbgomez.com>
  */
 class Modal extends Component {
@@ -69,7 +69,12 @@ class Modal extends Component {
         }
 
         // Close window
-        Overwolf.windows.hide( this.windowId, this.props.reset )
+        Overwolf.windows.hide( this.windowId, () => {
+            // Execute onClose method
+            this.props.onClose()
+            // Reset store
+            this.props.reset()
+        })
     }
 
     /**
@@ -132,7 +137,11 @@ class Modal extends Component {
 
         return <Fragment>
             <DefaultThemeGlobals fitContent />
-            <WindowHeader hideMinimize windowId={ this.windowId } beforeWindowClose={() => this.beforeWindowClose()} />
+            <WindowHeader
+                hideMinimize
+                windowId={ this.windowId }
+                beforeWindowClose={() => this.beforeWindowClose()}
+            />
             <WindowBody fitContent>
                 <Text>{ this.props.message }</Text>
                 <ButtonsWrapper buttons={ this.buttons.length } style={{ marginTop: spacing.l }}>

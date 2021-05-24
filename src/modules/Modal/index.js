@@ -14,7 +14,8 @@ const mapStateToProps = state => ({
     buttonLabel: state.modal.buttonLabel,
     buttonType: state.modal.buttonType,
     onConfirm: state.modal.onConfirm,
-    onCancel: state.modal.onCancel
+    onCancel: state.modal.onCancel,
+    onClose: state.modal.onClose
 })
 
 // Methods

@@ -1,5 +1,6 @@
 // Modules
 import { createStore } from 'redux'
+import Queue from 'queue'
 
 // Local modules
 import Configurations, { checkStorageSpace } from './Configurations'
@@ -29,8 +30,13 @@ import WIDGETS from '../configs/widgets'
         this.widgetsActions = {}
         this.store = createStore( Stores )
 
-        // Modal props
-        this.modalProps = {}
+        // Modal queue
+        this.queue = Queue({
+            timeout: null,
+            autostart: true,
+            concurrency: 1,
+            results: []
+        })
 
         // Config files
         this.configs = {
@@ -74,14 +80,28 @@ import WIDGETS from '../configs/widgets'
                 .catch(reject)
         })
     }
+
     /**
      * @param {object} props
      */
-    openModal(){
-        // Update opened time
-        this.store.dispatch( StoreActions.modal.updateOpenedDate( Date.now() ) )
-        // Restore vindow
-        Overwolf.windows.restore( this.windows.Modal )
+    openModal(props = {}){
+        this.queue.push(cb => {
+            // Update modal
+            this.store.dispatch( StoreActions.modal.update({
+               ...props,
+               opened: Date.now(),
+               onClose: async () => {
+                    // Execute props onClose if exists
+                    if(props.onClose == 'function') await props.onClose();
+
+                    // Queue CB
+                    return cb()
+                }
+            }) )
+
+            // Restore vindow
+            Overwolf.windows.restore( this.windows.Modal )
+        })
     }
 }
 
