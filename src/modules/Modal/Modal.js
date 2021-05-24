@@ -20,7 +20,7 @@ import { ButtonsWrapper } from './Layout.styled'
 /**
  * Modal module component
  * 
- * @version 0.2.0
+ * @version 0.3.0
  * @author DanielBGomez <contact@danielbgomez.com>
  */
 class Modal extends Component {
@@ -38,34 +38,87 @@ class Modal extends Component {
         }
 
         // Vars
-        this.buttons = []
+        this.buttons = [];
+    }
+
+    // React events
+    componentDidMount = () => Modal.updateWindowSize(this.windowId)
+    componentDidUpdate = () => setTimeout(() => Modal.updateWindowSize(this.windowId), 50)
+
+    /**
+     * Modal button click handler
+     * 
+     * @param {Number} index Button index 
+     */
+     async buttonClick(index){
+        // Ignore if already loading
+        if(this.state.loading) return;
+
+        // Has an callback?
+        const callback = this.props.type == 'choice' ? ( 
+                    index ?
+                        this.props.onConfirm
+                        : this.props.onCancel
+                ) : this.props.onConfirm
+
+        // Await callback
+        try {
+            await callback()
+        } catch(err){
+            // Ignore errors here
+        }
+
+        // Close window
+        Overwolf.windows.hide( this.windowId, this.props.reset )
+    }
+
+    /**
+     * Update the window size with the document body size
+     * 
+     * @param {string} windowId
+     */
+    static updateWindowSize(windowId){
+        // Get body size
+        const width = document.body.offsetWidth
+        const height = document.body.offsetHeight
+        // Change size
+        Overwolf.windows.changeSize({ window_id: windowId, width, height })
+    }
+
+    /**
+     * The render function
+     */
+    render(){
+        const {
+            type,
+            cancelLabel,
+            confirmLabel,
+            buttonLabel,
+            buttonType
+        } = this.props;
 
         // Parse type
-        switch(this.props.type) {
+        switch(type) {
             case 'choice':
                 this.buttons = [
                     {
                         type: 'hollow',
-                        label: this.props.cancelLabel || 'Cancel'
+                        label: cancelLabel || 'Cancel'
                     },
                     {
-                        type: 'secondary',
-                        label: this.props.confirmLabel || 'Confirm'
+                        type: buttonType,
+                        label: confirmLabel || 'Confirm'
                     }
                 ]
                 break
             case 'alert':
             default:
                 this.buttons = [{
-                    type: 'secondary',
-                    label: this.props.buttonLabel || 'Accept'
+                    type: buttonType,
+                    label: buttonLabel || 'Accept'
                 }]
         }
-    }
-    /**
-     * The render function
-     */
-    render(){
+
         return <Fragment>
             <DefaultThemeGlobals fitContent />
             <WindowHeader hideMinimize windowId={ this.windowId } />
@@ -83,48 +136,6 @@ class Modal extends Component {
             </WindowBody>
         </Fragment>
     }
-    /**
-     * Update the window height by the document body height
-     * 
-     * @param {string} windowId
-     */
-    static updateWindowSize(windowId){
-        // Get body size
-        const width = document.body.offsetWidth
-        const height = document.body.offsetHeight
-        // Change size
-        Overwolf.windows.changeSize({ window_id: windowId, width, height })
-    }
-    // React events
-    componentDidMount = () => Modal.updateWindowSize(this.windowId)
-    componentDidUpdate = () => Modal.updateWindowSize(this.windowId)
-    /**
-     * 
-     * @param {*} index 
-     * @returns 
-     */
-    async buttonClick(index){
-        // Ignore if already loading
-        if(this.state.loading) return;
-
-        // Has an callback?
-        const callback = this.props.type == 'choice' ? ( 
-                    index ?
-                        this.props.onConfirm
-                        : this.props.onCancel
-                ) : this.props.onConfirm
-        if(typeof callback == "funciton") {
-            // Await callback
-            try {
-                await callback()
-            } catch(err){
-                // Ignore errors here
-            }
-        }
-
-        // Close window
-        Overwolf.windows.minimize( this.windowId )
-    }
 }
 
 // Prop Types
@@ -139,6 +150,10 @@ Modal.propTypes = {
         PropTypes.string,
         PropTypes.node
     ]),
+    cancelLabel: PropTypes.string,
+    confirmLabel: PropTypes.string,
+    buttonLabel: PropTypes.string,
+    buttonType: PropTypes.string,
     // Events
     onConfirm: PropTypes.func,
     onCancel: PropTypes.func

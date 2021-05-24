@@ -1,6 +1,7 @@
 // Modules
-import React, { Fragment } from 'react'
+import React from 'react'
 import { render } from 'react-dom'
+import { Provider } from 'react-redux'
 
 // Component
 import Modal from './modules/Modal'
@@ -15,4 +16,7 @@ import Data from './methods/Data'
 const AppData = Data( OverWolf.windows.getMainWindow() )
 
 // Render
-render(<Modal {...AppData.modalProps} appData={AppData} windowId={AppData.windows.Modal} />, document.getElementById("app"))
+render(
+  <Provider store={ AppData.store }>
+    <Modal appData={AppData} windowId={AppData.windows.Modal} />
+  </Provider>, document.getElementById("app"))

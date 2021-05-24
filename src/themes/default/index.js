@@ -33,6 +33,10 @@ const GlobalStyle = createGlobalStyle`
         width: inherit;
         flex-direction: column;
         height: ${props => props.fitContent ? 'fit-content' : 'inherit'};
+
+        ${ props => props.fitContent && `
+            overflow: hidden;
+        `}
     }
 
     #app {

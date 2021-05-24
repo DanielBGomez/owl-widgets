@@ -8,7 +8,7 @@ import Configurations, { checkStorageSpace } from './Configurations'
 import Overwolf from '../docs/overwolf'
 
 // Reducers
-import Stores from '../stores'
+import Stores, { actions as StoreActions } from '../stores'
 
 // Consts
 import WIDGETS from '../configs/widgets' 
@@ -77,14 +77,12 @@ import WIDGETS from '../configs/widgets'
     /**
      * @param {object} props
      */
-    openModal(props = {}){
-        // Update modal props
-        this.modalProps = props
-        // Restore modal window        
+    openModal(){
+        // Update opened time
+        this.store.dispatch( StoreActions.modal.updateOpenedDate( Date.now() ) )
+        // Restore vindow
         Overwolf.windows.restore( this.windows.Modal )
     }
-    alert = (props = {}) => this.openModal({ ...props, type: 'alert' })
-    choice = (props = {}) => this.openModal({ ...props, type: 'choice' })
 }
 
 // Exports
