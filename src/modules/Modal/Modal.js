@@ -20,7 +20,7 @@ import { ButtonsWrapper } from './Layout.styled'
 /**
  * Modal module component
  * 
- * @version 0.3.0
+ * @version 0.3.1
  * @author DanielBGomez <contact@danielbgomez.com>
  */
 class Modal extends Component {
@@ -73,6 +73,17 @@ class Modal extends Component {
     }
 
     /**
+     * Ignore the default window close action and execute the first button clic action
+     */
+     async beforeWindowClose(){
+        // Simulate the first button click event
+        await this.buttonClick(0);
+
+        // Prevent default close function
+        return true;        
+    }
+
+    /**
      * Update the window size with the document body size
      * 
      * @param {string} windowId
@@ -121,7 +132,7 @@ class Modal extends Component {
 
         return <Fragment>
             <DefaultThemeGlobals fitContent />
-            <WindowHeader hideMinimize windowId={ this.windowId } />
+            <WindowHeader hideMinimize windowId={ this.windowId } beforeWindowClose={() => this.beforeWindowClose()} />
             <WindowBody fitContent>
                 <Text>{ this.props.message }</Text>
                 <ButtonsWrapper buttons={ this.buttons.length } style={{ marginTop: spacing.l }}>
