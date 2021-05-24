@@ -19,7 +19,7 @@ import WindowBody from '../../components/WindowBody'
 /**
  * Dashboard module component
  * 
- * @version 0.5.0
+ * @version 0.6.0
  * @author DanielBGomez <contact@danielbgomez.com>
  */
 class Dashboard extends React.Component {
@@ -35,15 +35,54 @@ class Dashboard extends React.Component {
         this.registerWidgets(this.appData.widgets)
     }
 
+    /**
+     * Before window close event.
+     * 
+     * Show a confirmation modal that closes the app when confirmed.
+     */
+    beforeWindowClose(){
+        return new Promise(resolve => {
+            // Open modal
+            this.appData.openModal({
+                type: 'choice',
+                message: <>
+                    Closing this window will stop all the widgets.<br /><br />¿Do you want to exit the app?
+                </>,
+                confirmLabel: 'Exit',
+                cancelLabel: 'Return',
+                buttonType: 'destructive',
+                onCancel: () => resolve(true),
+                onConfirm: () => resolve()
+            })
+        })
+    }
+
+    /**
+     * Window close event.
+     * 
+     * Close the main window (kill the app).
+     */
+    onWindowClose(){
+        // Close app
+        Overwolf.windows.close( this.appData.windows.Main );
+    }
+
+    /**
+     * The render function
+     */
     render(){
-        return <React.Fragment>
+        return <>
             <DefaultThemeGlobals />
-            <WindowHeader windowId={ this.windowId } />
+            <WindowHeader
+                windowId={ this.windowId }
+                beforeWindowClose={ this.beforeWindowClose.bind(this) }
+                onWindowClose={ () => this.onWindowClose() }
+            />
             <WindowBody>
                 <SectionTitle>Widgets</SectionTitle>
                 { this.props.widgets.map(widget => <WidgetCard key={ widget.uuid } {...widget} { ...this.widgetActions( widget ) } />) }
             </WindowBody>
-        </React.Fragment>
+        </>
     }
     /**
      * Register widgets by restoring their windows, logging errors as notifications.
@@ -98,6 +137,7 @@ class Dashboard extends React.Component {
                 this.props.registerMultipleWidgets(widgets)
             })
     }
+
     /**
      * Create an object with the widget's actions from props functions
      * 

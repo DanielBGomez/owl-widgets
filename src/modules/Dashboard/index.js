@@ -25,7 +25,10 @@ const mapDispatchToProps = dispatch => ({
     toggleWidget: uuid => dispatch( StoreActions.widgets.toggle(uuid) ),
 
     // Notifications
-    createNotification: notificaiton => dispatch( StoreActions.notifications.create(notificaiton) )
+    createNotification: notification => dispatch( StoreActions.notifications.create(notification) ),
+
+    // Modal
+    setupModal: values => dispatch( StoreActions.modal.update(values) )
 })
 
 // Container
