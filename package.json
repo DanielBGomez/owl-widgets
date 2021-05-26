@@ -64,6 +64,7 @@
     ]
   },
   "dependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "tmi.js": "^1.8.3"
   }
 }
